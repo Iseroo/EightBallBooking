@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:background="#DDD"
+    android:padding="10dp">
+
+    <Button
+        android:id="@+id/nav_btn_home"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="Home" />
+
+    <Button
+        android:id="@+id/nav_btn_profile"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="Profile" />
+
+    <!-- Add more navigation buttons as needed -->
+
+</LinearLayout>
