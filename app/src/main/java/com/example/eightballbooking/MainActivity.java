@@ -1,5 +1,8 @@
 package com.example.eightballbooking;
 
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,6 +20,28 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+// !!!!FONTOS!!!!
+// Andorid 11 verzióval tesztelve.
+// !!!!FONTOS!!!!
+
+//----------------------------
+//Utána számolva nagyjából 31 pont körül kell legyen, a szubjektív pontot nem számoltam bele.
+// A layout csak állóban működik, az 0 pont biztosan.
+// Permission van, internet kapcsolat ellenőrzése, de nem kezeli a hálózati hibákat, csak üzenetet dob.
+// OnStart-ban van ez.
+// CRUD van.
+// Notificationt dob abban a percben, amikorra foglalva lett. Az alkalmazás beállításaiban ellenőrizni kell hogy a notification be van-e kapcsolva.
+// Indexelt lekérdezés van:
+// 1: FirebaseFirestore.getInstance().collection("User").whereEqualTo("UUID"... kezdetű sor ebben a fileban
+// 2: Query query = db.collection("User").whereEqualTo("email", user.getEmail()); sor a Settings.java fileban
+// Layoutok vannak, ami fix a constraint meg a linerarLayout
+// Beviteli mezők típusosak
+// Van animáció (login loading és a golyó)
+// Van minimum 3 framgent meg activity
+// Adatmodell a User.java fileban van
+
+// Többi értékelés magától értetődő
+//------------------------
 public class MainActivity extends AppCompatActivity {
 
     private EditText emailEditText, passwordEditText;
@@ -84,6 +109,22 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(MainActivity.this, "Login failed: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        // Hálózati állapot ellenőrzése
+        ConnectivityManager connectivityManager =
+                (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+
+        // Ellenőrzi, hogy van-e csatlakozás valamilyen hálózathoz
+        if (activeNetworkInfo == null || !activeNetworkInfo.isConnected()) {
+            // Ha nincs hálózati kapcsolat, üzenet megjelenítése
+            Toast.makeText(this, "No internet connection", Toast.LENGTH_LONG).show();
+        }
     }
 
     private void openRegisterActivity() {

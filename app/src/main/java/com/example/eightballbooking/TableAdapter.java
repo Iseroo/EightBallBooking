@@ -146,7 +146,7 @@ public class TableAdapter extends RecyclerView.Adapter<TableAdapter.TableViewHol
             intent.putExtra(NotificationReceiver.NOTIFICATION_TITLE, "Appointment Reminder");
             intent.putExtra(NotificationReceiver.NOTIFICATION_BODY, "You have an appointment at Table " + tableId);
 
-            PendingIntent alarmIntent = PendingIntent.getBroadcast(itemView.getContext(), notificationId, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+            PendingIntent alarmIntent = PendingIntent.getBroadcast(itemView.getContext(), notificationId, intent, PendingIntent.FLAG_IMMUTABLE);
 
             AlarmManager alarmManager = (AlarmManager) itemView.getContext().getSystemService(Context.ALARM_SERVICE);
             if (alarmManager != null) {

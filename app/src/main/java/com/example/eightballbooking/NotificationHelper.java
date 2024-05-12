@@ -43,7 +43,7 @@ public class NotificationHelper {
     // Send high priority notification
     public void sendHighPriorityNotification(String title, String body, Class activityName, int notificationId) {
         Intent intent = new Intent(mContext, activityName);
-        PendingIntent pendingIntent = PendingIntent.getActivity(mContext, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        PendingIntent pendingIntent = PendingIntent.getActivity(mContext, 0, intent, PendingIntent.FLAG_IMMUTABLE);
 
         NotificationCompat.Builder builder = new NotificationCompat.Builder(mContext, CHANNEL_ID)
                 .setContentTitle(title)
